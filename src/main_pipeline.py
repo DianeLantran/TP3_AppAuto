@@ -31,6 +31,33 @@ y = df['booking_status']
 
 # Split the data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+"""
+print(X_train.flags)
+# Define the KNN classifier
+knn_classifier = KNeighborsClassifier()
+
+# Define hyperparameter grid for grid search
+param_grid = {
+    'n_neighbors': [3, 5, 7, 10],
+    'weights': ['uniform', 'distance'],
+    'p': [1, 2]  # 1 for Manhattan distance, 2 for Euclidean distance
+}
+
+# Perform grid search for the KNN classifier
+grid_search = GridSearchCV(knn_classifier, param_grid, scoring='accuracy', cv=3)
+grid_search.fit(X_train, y_train)
+
+# Get the best estimator
+best_knn = grid_search.best_estimator_
+
+# Evaluate the best KNN estimator on the test set
+y_pred = best_knn.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+
+# Print the best KNN estimator and accuracy
+print('Best KNN Estimator:', best_knn)
+print(f'Accuracy: {accuracy:.2f}')
+"""
 # Define classifiers
 classifiers = {
     'KNN': KNeighborsClassifier(),
