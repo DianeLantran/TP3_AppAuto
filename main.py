@@ -6,7 +6,7 @@ import preprocessing as prep
 
 # Importation de la base de donnée
 FILE_PATH = "data\Hotel_Reservations.csv"
-DATASET = pd.read_csv(FILE_PATH, sep=';')
+DATASET = pd.read_csv(FILE_PATH, sep=',')
 target = "booking_status"
 
 # Nettoyage des données : inutile car il n'y a pas de données manquantes dans cette base de données
@@ -26,5 +26,5 @@ print("y : ",y)
 # Standardise les données
 X = prep.standardize(X)
 
-# Lance la pipeline de régression linéaire
-linearRegPipelineUtils.executePipelines(X, y)
+# Lance la pipeline de la classification
+
