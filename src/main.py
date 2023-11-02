@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OrdinalEncoder
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -9,12 +9,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Sample dataset (replace with your dataset)
-data = "etset"
-
-df = pd.DataFrame(data)
+df = pd.read_csv('data/Hotel_Reservations.csv')
 
 # Define features and target
 features = df.columns.difference(['Booking_ID', 'booking_status'])
+print(features)
 X = df[features]
 y = df['booking_status']
 
@@ -26,7 +25,7 @@ numeric_transformer = Pipeline(steps=[
 
 categorical_features = ['room_type_reserved', 'market_segment_type']
 categorical_transformer = Pipeline(steps=[
-    ('onehot', OneHotEncoder(drop='first'))
+    ('onehot', OrdinalEncoder())
 ])
 
 preprocessor = ColumnTransformer(
