@@ -2,6 +2,7 @@ import dataTreatmentUtils
 import linearRegPipelineUtils
 import pandas as pd
 import preprocessing as prep
+import downsizeUtils
 
 
 # Importation de la base de donnée
@@ -25,6 +26,10 @@ print("y : ",y)
 
 # Standardise les données
 X = prep.standardize(X)
+
+# PCA des données : ***FACULTATIF : comparer avec et sans***
+reducData_PCA = downsizeUtils.PCA(df, 0.05) #les valeurs sous 5% ne sont pas prises en compte
+print(reducData_PCA)
 
 # Lance la pipeline de la classification
 
