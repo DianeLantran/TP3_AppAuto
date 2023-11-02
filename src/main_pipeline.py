@@ -110,7 +110,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Create a list of classifiers
 classifiers = [
-    #('KNN', KNeighborsClassifier()),
+    ('KNN', KNeighborsClassifier()),
     ('Decision Tree', DecisionTreeClassifier()),
     ('Random Forest', RandomForestClassifier()),
     ('HCLUST', AgglomerativeClustering()),  # HCLUST for clustering
@@ -119,10 +119,10 @@ classifiers = [
 
 # Define hyperparameter grids for grid search for each classifier
 param_grids = {
-    #'KNN': {
-    #    'classifier__n_neighbors': [3, 5, 7],
-    #    'classifier__p': [1, 2]
-    #},
+    'KNN': {
+        'classifier__n_neighbors': [3, 5, 7],
+        'classifier__p': [1, 2]
+    },
     'Decision Tree': {
         'classifier__max_depth': [None, 5, 10],
         'classifier__min_samples_split': [2, 5]

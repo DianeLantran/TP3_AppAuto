@@ -15,9 +15,13 @@ df = dataTreatmentUtils.removeUselessColumns(DATASET, 30) #(<70% de données sur
 
 
 # Prétraitement
+#fusion des colonnes jour/mois/annee d'arrivée en une colonne
+df['date_arrival'] = pd.to_datetime(df['arrival_year']*10000 + df['arrival_month']*100 + df['arrival_date'], format='%Y%m%d', errors='coerce')
+df.drop(['arrival_year', 'arrival_month', 'arrival_date'], axis=1, inplace=True)
+
 # Quantification des données :
 df = prep.colToOrdinal(df, ["Booking_ID", "type_of_meal_plan", 
-                            "room_type_reserved", "market_segment_type", "booking_status"])
+                            "room_type_reserved", "market_segment_type", "booking_status", "date_arrival"])
 
 # Séparaison de la base : X les caractéristiques et y la cible (colonne qualité)
 X = df.drop(columns=[target])
