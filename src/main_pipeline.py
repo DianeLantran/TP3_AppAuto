@@ -152,7 +152,7 @@ for name, classifier in classifiers:
     grid_search = GridSearchCV(clf_pipeline, param_grids[name], scoring='accuracy', cv=10)
     scores = cross_val_score(grid_search, X_train, y_train, cv=10)
     results1[name] = scores
-
+"""
     grid_search.fit(X_train, y_train)
     best_estimator = grid_search.best_estimator_
     
@@ -163,12 +163,14 @@ for name, classifier in classifiers:
         'best_estimator': best_estimator,
         'accuracy': accuracy
     }
+"""
     
 
 # Print the results
 for name, scores in results1.items():
     print(f'{name} Mean Accuracy: {scores.mean():.2f} (+/- {scores.std() * 2:.2f})')
-
+"""
 for name, result in results2.items():
     print(f'{name} Accuracy: {result["accuracy"]:.2f}')
     print(f'Best Estimator for {name}:\n{result["best_estimator"]}\n')
+"""
