@@ -2,7 +2,7 @@
 """
 Created on Mon Sep 25 01:04:09 2023
 
-@author: Mathilde
+@author: Mathilde & Diane
 """
 
 import pandas as pd
@@ -14,16 +14,11 @@ import seaborn as sns
 
 
 # Import
-FILE_PATH_R = "data/winequality-red.csv"
-FILE_PATH_W = "data/winequality-white.csv"
-DATASET_R = pd.read_csv(FILE_PATH_R, sep=';')
-DATASET_W = pd.read_csv(FILE_PATH_W, sep=';')
+FILE_PATH = "data/Hotel_Reservations.csv"
+DATASET = pd.read_csv(FILE_PATH, sep=',')
 
-description = DATASET_R.describe()
+description = DATASET.describe()
 description.to_markdown('description.md')
 
-# dv.plotMoyParQualite()
-dv.plotQualiteVSColDecrois()
-dv.plotQualiteVSColCrois()
-dv.plotQualiteVSColTot()
-# dv.plotBoitesMoustQuali()
+dv.canceledPopulation()
+dv.canceledPercentageByDate()
