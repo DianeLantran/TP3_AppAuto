@@ -1,4 +1,3 @@
-import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -11,12 +10,6 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder
 from sklearn.model_selection import cross_val_score, GridSearchCV
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.metrics import accuracy_score
 # Sample dataset (replace with your dataset)
 #custom_column_names = ["ID", "adultsCount", "ChildrenCount", "WENightsCount", "WeekNightsCount", "MealType", "ParkingSpaceRequired", "RoomType", "LeadTime", "ArrivalYear", "ArrivalMonth", "ArrivalDay", "MarketSegmentType", "RepeatedGuest", "NpPreviousCancellations"]
 df = pd.read_csv('data/Hotel_Reservations.csv')
@@ -113,7 +106,7 @@ classifiers = [
     #('KNN', KNeighborsClassifier()),
     ('Decision Tree', DecisionTreeClassifier()),
     ('Random Forest', RandomForestClassifier()),
-    ('HCLUST', AgglomerativeClustering()),  # HCLUST for clustering
+    #('HCLUST', AgglomerativeClustering()),  # HCLUST for clustering
     ('SVM', SVC())
 ]
 
@@ -131,7 +124,7 @@ param_grids = {
         'classifier__n_estimators': [10, 50, 100],
         'classifier__max_depth': [None, 5, 10]
     },
-    'HCLUST': {},  # No hyperparameters for HCLUST (clustering)
+    #'HCLUST': {},  # No hyperparameters for HCLUST (clustering)
     'SVM': {
         'classifier__C': [0.1, 1.0, 10.0],
         'classifier__kernel': ['linear', 'rbf', 'poly'],
@@ -149,21 +142,17 @@ for name, classifier in classifiers:
     ])
 
     # Perform grid search with 10-fold cross-validation
-    grid_search = GridSearchCV(clf_pipeline, param_grids[name], scoring='accuracy', cv=10)
-    scores = cross_val_score(grid_search, X_train, y_train, cv=10)
-    results1[name] = scores
-"""
+    #grid_search = GridSearchCV(clf_pipeline, param_grids[name], scoring='accuracy', cv=10)
+    #scores = cross_val_score(grid_search, X_train, y_train, cv=10)
+    #print(f'{name} Mean Accuracy: {scores.mean():.2f} (+/- {scores.std() * 2:.2f})')
+    grid_search = GridSearchCV(clf_pipeline, param_grids[name], scoring='accuracy', cv=3)
     grid_search.fit(X_train, y_train)
     best_estimator = grid_search.best_estimator_
     
-    # Evaluate the best estimator on the test set
     y_pred = best_estimator.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    results2[name] = {
-        'best_estimator': best_estimator,
-        'accuracy': accuracy
-    }
-"""
+    print(f'{name} Accuracy: {accuracy:.2f}')
+
     
 
 # Print the results
