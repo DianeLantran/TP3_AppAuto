@@ -1,0 +1,67 @@
+Best Estimator for KNN:
+{'classifier__n_neighbors': 3, 'classifier__p': 1}
+Best Accuracy for KNN: 0.86
+
+Best Estimator for Decision Tree:
+{'classifier__max_depth': None, 'classifier__min_samples_split': 2}
+Best Accuracy for Decision Tree: 0.85
+
+Best Estimator for Random Forest:
+{'classifier__max_depth': None, 'classifier__n_estimators': 100}
+Best Accuracy for Random Forest: 0.89
+
+Best Estimator for SVM:
+{'classifier__C': 15.0, 'classifier__degree': 2, 'classifier__kernel': 'rbf'}
+Best Accuracy for SVM: 0.83
+
+Best Estimator for Logistic Regression:
+{'classifier__C': 10.0}
+Best Accuracy for Logistic Regression: 0.79
+
+Best Estimator for Neural Network:
+{'classifier__activation': 'relu', 'classifier__hidden_layer_sizes': (100, 50, 25), 'classifier__max_iter': 1000}
+Best Accuracy for Neural Network: 0.86
+
+###Full parameters
+
+param_grids = {
+    'KNN': {
+        'classifier__n_neighbors': [2, 3, 4, 5, 7, 9, 15],
+        'classifier__p': [1, 2]
+    },
+    
+    'Decision Tree': {
+        'classifier__max_depth': [None, 5, 10],
+        'classifier__min_samples_split': [2, 5]
+    },
+    'Random Forest': {
+        'classifier__n_estimators': [10, 50, 100, 250],
+        'classifier__max_depth': [None, 5, 10]
+    },
+    'SVM': {
+        'classifier__C': [0.1, 0.5, 1.0, 10.0, 15.0],
+        'classifier__kernel': ['linear', 'rbf', 'poly', 'sigmoid'],
+        'classifier__degree': [2, 3, 5, 7],
+    },
+    'Logistic Regression': {
+        'classifier__C': [0.1, 0.5, 1.0, 10.0],
+    },
+    'Naive Bayes': {
+        'classifier__alpha': [1.0, 0.5, 0.1],
+    },
+    'Neural Network': {
+        'classifier__hidden_layer_sizes': [(50, 50), (100, 50, 25)],
+        'classifier__activation': ['relu', 'tanh'],
+        'classifier__max_iter': [1000],
+    }
+}
+
+classifiers = [
+    ('KNN', KNeighborsClassifier()),
+    ('Decision Tree', DecisionTreeClassifier()),
+    ('Random Forest', RandomForestClassifier()),
+    ('SVM', SVC()),
+    ('Logistic Regression', LogisticRegression()),
+    ('Naive Bayes', MultinomialNB()),
+    ('Neural Network', MLPClassifier())  # Add MLPClassifier
+]
