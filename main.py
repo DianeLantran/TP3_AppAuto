@@ -1,8 +1,7 @@
 import dataTreatmentUtils
-import linearRegPipelineUtils
 import pandas as pd
 import preprocessing as prep
-import downsizeUtils
+import classification
 
 
 # Importation de la base de donnée
@@ -13,27 +12,23 @@ target = "booking_status"
 # Nettoyage des données : inutile car il n'y a pas de données manquantes dans cette base de données
 df = dataTreatmentUtils.removeUselessColumns(DATASET, 30) #(<70% de données sur lignes et colones)
 
-
 # Prétraitement
 #fusion des colonnes jour/mois/annee d'arrivée en une colonne
-df['date_arrival'] = pd.to_datetime(df['arrival_year']*10000 + df['arrival_month']*100 + df['arrival_date'], format='%Y%m%d', errors='coerce')
-df.drop(['arrival_year', 'arrival_month', 'arrival_date'], axis=1, inplace=True)
+# df['date_arrival'] = pd.to_datetime(df['arrival_year']*10000 + df['arrival_month']*100 + df['arrival_date'], format='%Y%m%d', errors='coerce')
+# df.drop(['arrival_year', 'arrival_month', 'arrival_date'], axis=1, inplace=True)
 
 # Quantification des données :
-df = prep.colToOrdinal(df, ["Booking_ID", "type_of_meal_plan", 
-                            "room_type_reserved", "market_segment_type", "booking_status", "date_arrival"])
+categorical_cols = ['type_of_meal_plan', 'room_type_reserved', 'market_segment_type', "booking_status"]
+df = prep.colToOrdinal(df, categorical_cols)
 
 # Séparaison de la base : X les caractéristiques et y la cible (colonne qualité)
-X = df.drop(columns=[target])
+features = df.columns.difference(['Booking_ID', 'booking_status'])
+X = df[features]
 y = df[target]
-print("y : ",y)
+
 
 # Standardise les données
 X = prep.standardize(X)
 
-# PCA des données : ***FACULTATIF : comparer avec et sans***
-reducData_PCA = downsizeUtils.PCA(df, 0.05) #les valeurs sous 5% ne sont pas prises en compte
-print(reducData_PCA)
-
 # Lance la pipeline de la classification
-
+classification.classify(X, y)

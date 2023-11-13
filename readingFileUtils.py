@@ -1,5 +1,4 @@
 import csv
-import pandas as pd
 
 def getVariable(i, j, file_path):
     with open(file_path, 'r', newline='') as file:

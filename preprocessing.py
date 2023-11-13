@@ -5,7 +5,7 @@ Created on Thu Sep 21 14:26:08 2023
 @author: basil
 """
 import pandas as pd
-from sklearn.preprocessing import OrdinalEncoder, StandardScaler
+from sklearn.preprocessing import OrdinalEncoder, MinMaxScaler
 
 
 def colToOrdinal(df, colnames):
@@ -18,7 +18,7 @@ def colToOrdinal(df, colnames):
 
 
 def standardize(df):
-    scaler = StandardScaler()
+    scaler = MinMaxScaler()
     df_standardized = scaler.fit_transform(df)
     df_standardized = pd.DataFrame(df_standardized, columns=df.columns)
     return df_standardized
