@@ -1,4 +1,3 @@
-import dataTreatmentUtils
 import pandas as pd
 import preprocessing as prep
 import classification
@@ -6,11 +5,10 @@ import classification
 
 # Importation de la base de donnée
 FILE_PATH = "data\Hotel_Reservations.csv"
-DATASET = pd.read_csv(FILE_PATH, sep=',')
+df = pd.read_csv(FILE_PATH, sep=',')
 target = "booking_status"
 
 # Nettoyage des données : inutile car il n'y a pas de données manquantes dans cette base de données
-df = dataTreatmentUtils.removeUselessColumns(DATASET, 30) #(<70% de données sur lignes et colones)
 
 # Prétraitement
 #fusion des colonnes jour/mois/annee d'arrivée en une colonne
