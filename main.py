@@ -1,7 +1,7 @@
 import pandas as pd
 import preprocessing as prep
 import classification
-
+import src.plotClassifiers as pltModels
 
 # Importation de la base de donnée
 FILE_PATH = "data\Hotel_Reservations.csv"
@@ -29,4 +29,5 @@ y = df[target]
 X = prep.standardize(X)
 
 # Lance la pipeline de la classification
-classification.classify(X, y)
+trained_models = classification.classify(X, y)
+pltModels.plotModels(trained_models, X, y)
