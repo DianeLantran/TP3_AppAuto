@@ -138,7 +138,6 @@ def scores(y_test, y_pred, name):
 
 def graphScores(resultsList):
     model_names = [result[0] for result in resultsList]
-    model_names = [result[0] for result in resultsList]
     precision_scores = [metrics.precision_score(result[1], result[2]) for result in resultsList]
     recall_scores = [metrics.recall_score(result[1], result[2]) for result in resultsList]
     f1_scores = [metrics.f1_score(result[1], result[2]) for result in resultsList]
@@ -168,3 +167,24 @@ def graphScores(resultsList):
     plt.legend()
 
     plt.show()
+
+def ROCAndAUC(resultsList):
+    plt.figure(figsize=(8, 8))
+
+    for result in resultsList:
+        model_name = result[0]
+        y_test = result[1]
+        y_pred = result[2]
+
+        fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred)
+        auc = metrics.roc_auc_score(y_test, y_pred)
+
+        plt.plot(fpr, tpr, label=f'{model_name} (AUC = {auc:.2f})')
+
+    plt.plot([0, 1], [0, 1], linestyle='--', color='gray', label='Random')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
+

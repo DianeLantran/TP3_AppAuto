@@ -32,6 +32,7 @@ X = prep.standardize(X)
 
 # Lance la pipeline de la classification
 trained_models,resultsList = classification.classify(X, y)
-pltModels.plotModels(trained_models, X, y)
+#pltModels.plotModels(trained_models, X, y)
 
-eva.graphScores(resultsList)
+#eva.graphScores(resultsList)
+eva.ROCAndAUC(resultsList)
