@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep 25 01:04:09 2023
+Created on Mon Nov 15 01:04:09 2023
 
-@author: Mathilde & Diane
+@author: Diane Lantran
 """
 
 import pandas as pd
@@ -11,7 +11,8 @@ import preprocessing as prep
 import numpy as np
 import dataViz as dv
 import seaborn as sns
-
+import markdown2
+import csv
 
 # Import
 FILE_PATH = "data/Hotel_Reservations.csv"
@@ -22,3 +23,18 @@ description.to_markdown('description.md')
 
 dv.canceledPopulation()
 dv.canceledPercentageByDate()
+dv.canceledByPreviousRes()
+dv.cancelationByMenuType()
+dv.menuChoiceRepartition()
+dv.cancelationByRoomType()
+dv.cancelationByParkingLot()
+dv.parkingLotRepartition()
+dv.menuChoiceRepartition()
+dv.cancelationNbSpeReq()
+dv.nightRepartition()
+dv.nightWeekRepartition()
+dv.nightWeekERepartition()
+dv.cancelationPerMarketSeg()
+dv.cancelationRoomPrice()
+dv.marketSegRepartition()
+dv.canceledRepartition()
