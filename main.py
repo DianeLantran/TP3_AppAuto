@@ -11,13 +11,7 @@ target = "booking_status"
 
 # Nettoyage des données : inutile car il n'y a pas de données manquantes dans cette base de données
 
-
-# Prétraitement
-#fusion des colonnes jour/mois/annee d'arrivée en une colonne
-# df['date_arrival'] = pd.to_datetime(df['arrival_year']*10000 + df['arrival_month']*100 + df['arrival_date'], format='%Y%m%d', errors='coerce')
-# df.drop(['arrival_year', 'arrival_month', 'arrival_date'], axis=1, inplace=True)
-
-# Quantification des données :
+# Encodage des données :
 categorical_cols = ['type_of_meal_plan', 'room_type_reserved', 'market_segment_type', "booking_status"]
 df = prep.colToOrdinal(df, categorical_cols)
 
