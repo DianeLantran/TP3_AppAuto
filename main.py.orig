@@ -2,7 +2,6 @@ import pandas as pd
 import preprocessing as prep
 import classification
 import src.plotClassifiers as pltModels
-import evaluationUtils as eva
 
 # Importation de la base de donnée
 FILE_PATH = "data\Hotel_Reservations.csv"
@@ -10,7 +9,6 @@ df = pd.read_csv(FILE_PATH, sep=',')
 target = "booking_status"
 
 # Nettoyage des données : inutile car il n'y a pas de données manquantes dans cette base de données
-
 
 # Prétraitement
 #fusion des colonnes jour/mois/annee d'arrivée en une colonne
@@ -31,7 +29,11 @@ y = df[target]
 X = prep.standardize(X)
 
 # Lance la pipeline de la classification
-trained_models,resultsList = classification.classify(X, y)
-pltModels.plotModels(trained_models, X, y)
+<<<<<<< HEAD
+classification.classify(X, y)
 
-eva.graphScores(resultsList)
+
+=======
+trained_models = classification.classify(X, y)
+pltModels.plotModels(trained_models, X, y)
+>>>>>>> b89f138d02edda5e6f503f63404eed446cfd1d89

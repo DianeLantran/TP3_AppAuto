@@ -36,7 +36,6 @@ classifiers = [
 ]
 def classify(X, y):
     trained_models = {}
-    results_list=[]
     for name, classifier in classifiers:
         if name in ('SVM', 'Naive Bayes', "Decision Tree", "Random Forest",
                     "Logistic Regression"):
@@ -57,8 +56,10 @@ def classify(X, y):
         pca = PCA(2)
         test_df = pca.fit_transform(X_test)
         #plotResults(test_df,y_test,y_pred,name)
-        results_list.append([name, y_test, y_pred])
-    return trained_models,results_list
+        #eva.confusionMatrix(y_test,y_pred,name)
+        eva.scores(y_test,y_pred,name)
+
+
     
 def plotResults(test_df,y_test,y_pred, name): 
     colors_actual_correct = ['blue' if class_label == 0 else 'red' for class_label in y_pred[y_test == y_pred]]
@@ -69,8 +70,17 @@ def plotResults(test_df,y_test,y_pred, name):
     # Plot incorrectly predicted points with crosses
     plt.scatter(test_df[y_test != y_pred, 0], test_df[y_test != y_pred, 1], marker='x', c=colors_actual_incorrect, label='Incorrect Predictions')
         
+<<<<<<< HEAD
     plt.title(f'Scatter Plot with PCA for {name}')
     plt.xlabel('Principal Component 1')
     plt.ylabel('Principal Component 2')
     plt.legend()
     plt.show()
+=======
+        plt.title(f'Scatter Plot with PCA for {name}')
+        plt.xlabel('Principal Component 1')
+        plt.ylabel('Principal Component 2')
+        plt.legend()
+        plt.show()
+    return trained_models
+>>>>>>> b89f138d02edda5e6f503f63404eed446cfd1d89
