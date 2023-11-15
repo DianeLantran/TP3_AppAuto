@@ -35,6 +35,7 @@ classifiers = [
     
 ]
 def classify(X, y):
+    trained_models = {}
     for name, classifier in classifiers:
         if name in ('SVM', 'Naive Bayes', "Decision Tree", "Random Forest",
                     "Logistic Regression"):
@@ -49,13 +50,15 @@ def classify(X, y):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         pipeline.fit(X_train, y_train)
         y_pred = pipeline.predict(X_test)
+        accuracy = accuracy_score(y_test, y_pred)
+        print(f'Accuracy for {name}: {accuracy:.2f}')
+        trained_models[name] = pipeline.named_steps['classifier']
         pca = PCA(2)
         test_df = pca.fit_transform(X_test)
         #plotResults(test_df,y_test,y_pred,name)
         #eva.confusionMatrix(y_test,y_pred,name)
         eva.scores(y_test,y_pred,name)
-
-
+    return trained_models
     
 def plotResults(test_df,y_test,y_pred, name): 
     colors_actual_correct = ['blue' if class_label == 0 else 'red' for class_label in y_pred[y_test == y_pred]]

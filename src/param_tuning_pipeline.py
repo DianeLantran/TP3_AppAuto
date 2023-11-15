@@ -36,9 +36,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # Create a list of classifiers
 classifiers = [
     ('KNN', KNeighborsClassifier()),
+    ('Decision Tree', DecisionTreeClassifier()),
+    ('Random Forest', RandomForestClassifier()),
+    ('SVM', SVC()),
+    ('Logistic Regression', LogisticRegression()),
     ('Naive Bayes', MultinomialNB()),
-    #('Neural Network', MLPClassifier())  # Add MLPClassifier
-    ('Logistic Regression', LogisticRegression())
+    ('Neural Network', MLPClassifier())  # Add MLPClassifier
 ]
 
 
@@ -48,13 +51,31 @@ param_grids = {
         'classifier__n_neighbors': [2, 3, 4, 5, 7, 9, 15],
         'classifier__p': [1, 2]
     },
-    'Naive Bayes': {
-        'classifier__alpha': [1.0, 0.5, 0.1, 0.05],
+    
+    'Decision Tree': {
+        'classifier__max_depth': [None, 5, 10],
+        'classifier__min_samples_split': [2, 5]
+    },
+    'Random Forest': {
+        'classifier__n_estimators': [10, 50, 100, 250],
+        'classifier__max_depth': [None, 5, 10]
+    },
+    'SVM': {
+        'classifier__C': [0.1, 0.5, 1.0, 10.0, 15.0],
+        'classifier__kernel': ['linear', 'rbf', 'poly', 'sigmoid'],
+        'classifier__degree': [2, 3, 5, 7],
     },
     'Logistic Regression': {
-        'classifier__C': [0.1, 1.0, 10.0, 12.0],
-        "classifier__max_iter": [100, 500, 1000]
+        'classifier__C': [0.1, 0.5, 1.0, 10.0],
     },
+    'Naive Bayes': {
+        'classifier__alpha': [1.0, 0.5, 0.1],
+    },
+    'Neural Network': {
+        'classifier__hidden_layer_sizes': [(50, 50), (100, 50, 25)],
+        'classifier__activation': ['relu', 'tanh'],
+        'classifier__max_iter': [1000],
+    }
 }
 
 # Create a custom pipeline for each classifier and perform grid search over 10 folds
