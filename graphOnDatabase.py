@@ -11,8 +11,6 @@ import preprocessing as prep
 import numpy as np
 import dataViz as dv
 import seaborn as sns
-import markdown2
-import csv
 
 # Import
 FILE_PATH = "data/Hotel_Reservations.csv"
