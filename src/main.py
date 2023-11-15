@@ -1,7 +1,7 @@
 import pandas as pd
 import preprocessing as prep
 import classification
-import src.plotClassifiers as pltModels
+import plotClassifiers as pltModels
 import evaluationUtils as eva
 
 # Importation de la base de donnée
@@ -25,8 +25,7 @@ y = df[target]
 X = prep.standardize(X)
 
 # Lance la pipeline de la classification
-trained_models,resultsList = classification.classify(X, y)
-#pltModels.plotModels(trained_models, X, y)
+trained_models, resultsList = classification.classify(X, y)
 
 #eva.graphScores(resultsList)
 eva.ROCAndAUC(resultsList)
