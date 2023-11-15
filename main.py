@@ -32,3 +32,5 @@ X = prep.standardize(X)
 
 # Lance la pipeline de la classification
 classification.classify(X, y)
+
+

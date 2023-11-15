@@ -9,6 +9,8 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def mae(y_true, y_pred):
     return ((y_pred - y_true) ** 2).mean()
@@ -104,3 +106,31 @@ def cross_validation_matrix(model, X, y, k):
     # Affiche le DataFrame
     print(df)
     return cross_val_scores
+
+def confusionMatrix(y_test, y_pred, name):
+    # Calculer la matrice de confusion
+    cm = metrics.confusion_matrix(y_test, y_pred)
+
+    # Afficher la matrice de confusion avec seaborn
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False,
+                xticklabels=['Classe 0', 'Classe 1'],
+                yticklabels=['Classe 0', 'Classe 1'])
+    plt.xlabel('Predictions')
+    plt.ylabel('True labels')
+    plt.title(f'Confusion matrix for {name}')
+    plt.show()
+
+def scores(y_test, y_pred, name):
+    precision = metrics.precision_score(y_test, y_pred)
+    recall = metrics.recall_score(y_test, y_pred)
+    f1 = metrics.f1_score(y_test, y_pred)
+
+    print(f'Methode: {name}')
+    print("Précision:", precision)
+    print("Rappel:", recall)
+    print("F1-score:", f1)
+    
+    report = metrics.classification_report(y_test, y_pred)
+    print("Rapport de classification:")
+    print(report)

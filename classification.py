@@ -17,6 +17,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 import numpy as np
+import evaluationUtils as eva
+
+
 classifiers = [
     ('KNN', KNeighborsClassifier(n_neighbors = 3, p = 1)),
     ('Decision Tree', DecisionTreeClassifier(max_depth = None, 
@@ -48,15 +51,23 @@ def classify(X, y):
         y_pred = pipeline.predict(X_test)
         pca = PCA(2)
         test_df = pca.fit_transform(X_test)
-        colors_actual_correct = ['blue' if class_label == 0 else 'red' for class_label in y_pred[y_test == y_pred]]
-        colors_actual_incorrect = ['blue' if class_label == 0 else 'red' for class_label in y_pred[y_test != y_pred]]
-        plt.scatter(test_df[y_test == y_pred, 0], test_df[y_test == y_pred, 1], marker='o', c=colors_actual_correct, label='Correct Predictions')
+        #plotResults(test_df,y_test,y_pred,name)
+        #eva.confusionMatrix(y_test,y_pred,name)
+        eva.scores(y_test,y_pred,name)
 
-        # Plot incorrectly predicted points with crosses
-        plt.scatter(test_df[y_test != y_pred, 0], test_df[y_test != y_pred, 1], marker='x', c=colors_actual_incorrect, label='Incorrect Predictions')
+
+    
+def plotResults(test_df,y_test,y_pred, name): 
+    colors_actual_correct = ['blue' if class_label == 0 else 'red' for class_label in y_pred[y_test == y_pred]]
+    colors_actual_incorrect = ['blue' if class_label == 0 else 'red' for class_label in y_pred[y_test != y_pred]]
+
+    # Plot corrects with points
+    plt.scatter(test_df[y_test == y_pred, 0], test_df[y_test == y_pred, 1], marker='o', c=colors_actual_correct, label='Correct Predictions')
+    # Plot incorrectly predicted points with crosses
+    plt.scatter(test_df[y_test != y_pred, 0], test_df[y_test != y_pred, 1], marker='x', c=colors_actual_incorrect, label='Incorrect Predictions')
         
-        plt.title(f'Scatter Plot with PCA for {name}')
-        plt.xlabel('Principal Component 1')
-        plt.ylabel('Principal Component 2')
-        plt.legend()
-        plt.show()
+    plt.title(f'Scatter Plot with PCA for {name}')
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.legend()
+    plt.show()
