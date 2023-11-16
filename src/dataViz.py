@@ -7,11 +7,7 @@ Created on Thu Nov 02 01:04:09 2023
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import preprocessing as prep
-import seaborn as sns
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
-
 
 # Import
 df = pd.read_csv("data/Hotel_Reservations.csv", sep=',')

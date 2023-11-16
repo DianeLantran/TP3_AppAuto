@@ -81,7 +81,6 @@ def residual_plot(axis, y_true, y_predicted):
     return axis
     
 
-
 def cross_validation_matrix(model, X, y, k):
     fold_size = len(X) // k
     cross_val_scores = []

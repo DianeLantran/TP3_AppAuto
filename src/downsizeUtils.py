@@ -4,7 +4,6 @@ Created on Thu Sep 21 2023
 @author: diane
 """
 
-import pandas as pd
 import numpy as np
 from scipy.linalg import eigh
 

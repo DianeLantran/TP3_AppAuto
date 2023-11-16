@@ -2,33 +2,28 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.svm import SVC
 import pandas as pd
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OrdinalEncoder, MinMaxScaler
-from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neural_network import MLPClassifier
 from sklearn.decomposition import PCA
+import preprocessing as prep
 
-# Get dataset
-df = pd.read_csv('../data/Hotel_Reservations.csv')
+# Importation de la base de donnée
+FILE_PATH = "../data/Hotel_Reservations.csv"
+df = pd.read_csv(FILE_PATH, sep=',')
+
+# Nettoyage des données : inutile car il n'y a pas de données manquantes dans 
+# cette base de données
+
+target = "booking_status"
 features = df.columns.difference(['Booking_ID', 'booking_status'])
 categorical_cols = ['type_of_meal_plan', 'room_type_reserved', 'market_segment_type', "booking_status"]
 
-# Ordinal Encoding
-encoder = OrdinalEncoder()
-df[categorical_cols] = encoder.fit_transform(df[categorical_cols])
-
-# Standardization
-scaler = MinMaxScaler()
-df[features] = scaler.fit_transform(df[features])
-
-# Set features & target sets
-X = df[features]
-y = df['booking_status']
+# Preprocessing
+X, y = prep.preprocess(df, categorical_cols, features, target)
 
 # Split the data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
