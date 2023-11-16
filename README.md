@@ -1,2 +1,2 @@
-# TP2_AppAuto
-Git du TP2 d'apprentissage automatique
+# TP3_AppAuto
+Git du TP3 d'apprentissage automatique

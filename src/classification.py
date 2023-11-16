@@ -15,7 +15,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import matplotlib.pyplot as plt
 
 classifiers = [
     ('KNN', KNeighborsClassifier(n_neighbors = 3, p = 1)),
