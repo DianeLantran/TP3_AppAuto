@@ -6,7 +6,11 @@ Created on Mon Nov 15 01:04:09 2023
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
+import preprocessing as prep
+import numpy as np
 import dataViz as dv
+import seaborn as sns
 
 # Import
 FILE_PATH = "data/Hotel_Reservations.csv"
@@ -23,7 +27,7 @@ dv.menuChoiceRepartition()
 dv.cancelationByRoomType()
 dv.cancelationByParkingLot()
 dv.parkingLotRepartition()
-dv.menuChoiceRepartition()
+dv.roomTypeRepartition()
 dv.cancelationNbSpeReq()
 dv.nightRepartition()
 dv.nightWeekRepartition()
